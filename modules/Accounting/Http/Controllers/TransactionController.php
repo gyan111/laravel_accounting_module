@@ -1,24 +1,26 @@
-<?php namespace App\Http\Controllers;
+<?php namespace Modules\Accounting\Http\Controllers;
+
 
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 
 //use Illuminate\Http\Request;
-use App\Transaction;
-use App\Category;
-use App\Account;
+use Modules\Accounting\Entities\Transaction;
+// use App\Transaction;
+use Modules\Accounting\Entities\Category;
+use Modules\Accounting\Entities\Account;
 use Auth;
 use Validator;
 use Request;
 use Redirect;
 use Carbon\Carbon;
-use App\Http\Requests\TransactionRequest;
+use Modules\Accounting\Http\Requests\TransactionRequest;
 
 class TransactionController extends Controller {
 
 	public function __construct()
     {
-    	$this->middleware('auth');
+    	// $this->middleware('auth');
     }
 
 	/**
@@ -31,7 +33,8 @@ class TransactionController extends Controller {
 		if (Request::ajax()) {
 			return response()->json(Transaction::all());
 		} else 	{
-			return View('transaction.view')->withTransactions(Transaction::all())->withCategories(Category::all()->lists('category_name', 'id'))->withaccounts(Account::all()->lists('account_name', 'id'));
+			// return view('page::admin.create');
+			return View('transaction.view')->withTransactions(Transaction::all())->withCategories(Category::all()->lists('category_name', 'id'))->withAccounts(Account::all()->lists('account_name', 'id'));
 		}
 	}
 
@@ -42,7 +45,8 @@ class TransactionController extends Controller {
 	 */
 	public function create()
 	{
-		return view('transaction.create')->withCategories(Category::all()->lists('category_name', 'id'))->withaccounts(Account::all()->lists('account_name', 'id'));
+
+		return view('transaction.create')->withCategories(Category::all()->lists('category_name', 'id'))->withAccounts(Account::all()->lists('account_name', 'id'));
 	}
 
 	/**
@@ -57,8 +61,8 @@ class TransactionController extends Controller {
 		$category = Category::findOrFail($request->category_id);
 		$account = Account::findOrFail($request->account_id);
 
-		$transaction->createdBy()->associate(Auth::user());
-        $transaction->modifiedBy()->associate(Auth::user());
+		// $transaction->createdBy()->associate(Auth::user());
+        // $transaction->modifiedBy()->associate(Auth::user());
         $transaction->account()->associate($account);
         $transaction->category()->associate($category);
         $transaction->save();
@@ -73,7 +77,7 @@ class TransactionController extends Controller {
 		{
 			$request->session()->flash('message', trans('message.transaction_added'));
 
-			return Redirect::to('transaction');
+			return Redirect::to('accounting/transaction');
 		}
 	}
 
@@ -114,15 +118,15 @@ class TransactionController extends Controller {
 		$category = Category::findOrFail($request->category_id);
 		$account = Account::findOrFail($request->account_id);
 
-		$transaction->createdBy()->associate(Auth::user());
-        $transaction->modifiedBy()->associate(Auth::user());
+		// $transaction->createdBy()->associate(Auth::user());
+        // $transaction->modifiedBy()->associate(Auth::user());
         $transaction->account()->associate($account);
         $transaction->category()->associate($category);
         $transaction->save();
 
         $request->session()->flash('message', trans('message.transaction_updated'));
 
-		return Redirect::to('transaction');
+		return Redirect::to('accounting/transaction');
 	}
 
 	/**

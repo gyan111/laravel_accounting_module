@@ -43,7 +43,7 @@
 									{!! Form::text('amount', null, ['size' => 10, 'class' => 'input-sm form-control', 'placeholder' => trans('phrases.amount'), 'id' => 'amount_input']) !!}									
 								</td>
 								<td>
-									{!! Form::select('account_input', ['' => trans('phrases.select_account')] +  $accounts, Input::old('account_id'), array('class' => 'input-sm form-control', 'id' => 'account_input')) !!}
+									{!! Form::select('account_input', ['' => trans('phrases.select_account')] +  $accounts->toArray(), Input::old('account_id'), array('class' => 'input-sm form-control', 'id' => 'account_input')) !!}
 								</td>
 								<td>
 									<button style="margin-left: 25px;" id="add_transaction_on_transaction_view" class="btn btn-info btn-sm">{{ trans('buttons.add') }}</button>
@@ -80,7 +80,7 @@
 									<span id="category_field_{{ $transaction->id }}">
 										{{ $categories[$transaction->category_id]}}
 									</span>
-									{!! Form::select('category_input', ['' => trans('phrases.select_category')] + App\Category::where('type', $transaction->type)->get()->lists('category_name', 'id'), $transaction->category_id , array('style' => 'display:none;', 'class' => 'input-sm form-control hidden_input', 'id' => "category_input_$transaction->id")) !!}
+									{!! Form::select('category_input', ['' => trans('phrases.select_category')] + Modules\Accounting\Entities\Category::where('type', $transaction->type)->get()->lists('category_name', 'id')->toArray(), $transaction->category_id , array('style' => 'display:none;', 'class' => 'input-sm form-control hidden_input', 'id' => "category_input_$transaction->id")) !!}
 								</td>
 								<td>
 									<span id="amount_field_{{ $transaction->id }}" class=" 
@@ -99,7 +99,7 @@
 									<span id="account_field_{{ $transaction->id }}">
 										{{ $accounts[$transaction->account_id]}}
 									</span>
-									{!! Form::select('account_input', ['' => trans('phrases.select_account')] + $accounts, $transaction->account_id, array('style' => 'display:none;', 'class' => 'input-sm form-control hidden_input', 'id' => "account_input_$transaction->id")) !!}
+									{!! Form::select('account_input', ['' => trans('phrases.select_account')] + $accounts->toArray(), $transaction->account_id, array('style' => 'display:none;', 'class' => 'input-sm form-control hidden_input', 'id' => "account_input_$transaction->id")) !!}
 								</td>
 								<td>
 									<a id="update_{{ $transaction->id }}" class="btn btn-info btn-sm update_transaction_button">
@@ -111,7 +111,7 @@
 									<a id="cancel_button_{{ $transaction->id }}" style="display:none;" class="btn btn-info btn-sm cancel_button">{{ trans('buttons.cancel') }}</a>
 								<a id="delete_transaction_{{ $transaction->id }}" class="btn btn-sm btn-danger delete_transaction_button">{{ trans('buttons.delete') }}</a>
 								   <!--
-									{!! Form::open(['method'=>'delete','route'=> ['transaction.destroy',$transaction->id ]]) !!}
+									{!! Form::open(['method'=>'delete','route'=> ['accounting.transaction.destroy',$transaction->id ]]) !!}
 	                                 <button onclick="return confirm('Do you really want to delete the Transaction ?');" class="btn btn-danger" type="submit"><span class="glyphicon glyphicon-trash" aria-hidden="true"></span> Delete</button>
 	                                {!! Form::close() !!}   
 	                                -->

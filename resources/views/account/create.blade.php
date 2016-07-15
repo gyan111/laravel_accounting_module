@@ -18,7 +18,7 @@
 						</div>
 					@endif
 
-					{!! Form::open(['route' => 'account.store', 'class' => 'form-horizontal']) !!}
+					{!! Form::open(['route' => 'accounting.account.store', 'class' => 'form-horizontal']) !!}
 
 						@include('account._form',['submit_button_text' => trans('buttons.create')])
 

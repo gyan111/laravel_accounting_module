@@ -1,7 +1,7 @@
 <div class="form-group">
 	{!! sprintf(Form::label('account', '%s', ['class' => 'col-sm-4 control-label']), trans('phrases.account') . ' <span class="text-danger">*</span>') !!}
 	<div class="col-md-6">
-		{!! Form::select('account_id', ['' => trans('phrases.select_account')] + $accounts, null, array('class' => 'form-control')) !!}
+		{!! Form::select('account_id', ['' => trans('phrases.select_account')] + $accounts->toArray(), null, array('class' => 'form-control')) !!}
 		{!! $errors->first('account_id', '<span class="text-danger">:message</span>') !!}
 	</div>
 </div>
@@ -23,7 +23,7 @@
 {!! sprintf(Form::label('category_id', '%s', ['class' => 'col-sm-4 control-label']), trans('phrases.category') . ' <span class="text-danger">*</span>') !!}
 	<div class="col-md-6">
 		@if (isset($transaction))
-			{!! Form::select('category_id', ['' => trans('phrases.select_category')] + App\Category::where('type', $transaction->type)->get()->lists('category_name', 'id'), $transaction->category_id , ['class' => 'form-control', 'id' => "category_input"]) !!}
+			{!! Form::select('category_id', ['' => trans('phrases.select_category')] + $category = App\Category::where('type', $transaction->type)->get()->lists('category_name', 'id')->toArray(), $transaction->category_id , ['class' => 'form-control', 'id' => "category_input"]) !!}
 		@else
 			{!! Form::select('category_id', ['' => trans('phrases.select_category')], null, ['class' => 'form-control', 'id' => 'category_input']) !!}
 		@endif

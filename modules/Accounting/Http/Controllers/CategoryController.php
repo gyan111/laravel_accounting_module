@@ -1,20 +1,20 @@
-<?php namespace App\Http\Controllers;
+<?php namespace Modules\Accounting\Http\Controllers;
 
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 
 use Auth;
-use App\Category;
+use Modules\Accounting\Entities\Category;
 use Validator;
 use Request;
 use Redirect;
-use App\Http\Requests\CategoryRequest;
+use Modules\Accounting\Http\Requests\CategoryRequest;
 
 class CategoryController extends Controller {
 
 	public function __construct()
     {
-    	$this->middleware('auth');
+    	// $this->middleware('auth');
     }
 
 	/**
@@ -46,13 +46,13 @@ class CategoryController extends Controller {
 	public function store(CategoryRequest $request)
 	{
 		$category = Category::create($request->all());
-		$category->createdBy()->associate(Auth::user());
-        $category->modifiedBy()->associate(Auth::user());
+		// $category->createdBy()->associate(Auth::user());
+  //       $category->modifiedBy()->associate(Auth::user());
         $category->save();
 
 		$request->session()->flash('message', trans('message.category_added'));
 
-		return Redirect::to('category');
+		return Redirect::to('accounting/category');
 	}
 
 	/**
@@ -89,12 +89,12 @@ class CategoryController extends Controller {
 		$category = Category::find($id);
 
 		$category->update($request->all());
-        $category->modifiedBy()->associate(Auth::user());
+        // $category->modifiedBy()->associate(Auth::user());
         $category->save();
 
 		$request->session()->flash('message', trans('message.category_updated'));
 
-		return Redirect::to('category');	
+		return Redirect::to('accounting/category');	
 	}
 
 	/**
@@ -109,7 +109,7 @@ class CategoryController extends Controller {
 		$category->delete();
 
 		session()->flash('message', trans('message.categorty_deleted'));
-		return Redirect::to('category');
+		return Redirect::to('accounting/category');
 	}
 
 	/**

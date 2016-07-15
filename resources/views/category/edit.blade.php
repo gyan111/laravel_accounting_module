@@ -18,7 +18,7 @@
 						</div>
 					@endif
 
-					{!! Form::model($category,['method' => 'PUT', 'route' => ['category.update', $category->id], 'class' => 'form-horizontal']) !!}
+					{!! Form::model($category,['method' => 'PUT', 'route' => ['accounting.category.update', $category->id], 'class' => 'form-horizontal']) !!}
 						
 						@include('category._form',['submit_button_text' => trans('buttons.update')])
 

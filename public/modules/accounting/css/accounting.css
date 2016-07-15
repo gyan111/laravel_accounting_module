@@ -1,0 +1,35 @@
+/* adding flags to the classes for changing language */
+.lang {
+	width: 16px;
+	height:11px;
+    display: inline-block;
+    background:black;
+    background-repeat:no-repeat;
+}
+.lang-nl {
+	background-image: url("flag-images/nl.gif");
+}
+.lang-en {
+	background-image: url("flag-images/england.gif");
+}
+.lang-fr {
+	background-image: url("flag-images/fr.gif");
+}
+.lang-de {
+	background-image: url("flag-images/de.gif");
+}
+.lang-it {
+	background-image: url("flag-images/it.gif");
+}
+.lang-pl {
+	background-image: url("flag-images/pl.gif");
+}
+.lang-pt {
+	background-image: url("flag-images/br.gif");
+}
+.lang-ru {
+	background-image: url("flag-images/ru.gif");
+}
+.lang-es {
+	background-image: url("flag-images/es.gif");
+}

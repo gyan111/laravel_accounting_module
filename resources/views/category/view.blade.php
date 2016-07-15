@@ -29,7 +29,7 @@
 									<td>{{ $category->type }}</td>
 									<td><a class="btn btn-primary" href="category/{{ $category->id }}/edit"><span class="glyphicon glyphicon-edit large" aria-hidden="true"> {{ trans('phrases.edit') }}</span></a></td>
 									<td>
-										{!! Form::open(['method'=>'delete','route'=> ['category.destroy',$category->id ]]) !!}
+										{!! Form::open(['method'=>'delete','route'=> ['accounting.category.destroy',$category->id ]]) !!}
 		                                 <button onclick="return confirm('Do you really want to delete the Category ?');" class="btn btn-danger" type="submit"><span class="glyphicon glyphicon-trash" aria-hidden="true"></span> {{ trans('phrases.delete') }}</button>
 		                                {!! Form::close() !!}   
 	                                </td>

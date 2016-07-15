@@ -27,7 +27,7 @@
 								<td>{{ $account->account_name }}</td>
 								<td><a class="btn btn-primary" href="account/{{ $account->id }}/edit"><span class="glyphicon glyphicon-edit large" aria-hidden="true"> {{ trans('buttons.edit') }}</span></a></td>
 								<td>
-									{!! Form::open(['method'=>'delete','route'=> ['account.destroy',$account->id ]]) !!}
+									{!! Form::open(['method'=>'delete','route'=> ['accounting.account.destroy',$account->id ]]) !!}
 	                                 <button onclick="return confirm('Do you really want to delete the Account ?');" class="btn btn-danger" type="submit"><span class="glyphicon glyphicon-trash" aria-hidden="true"></span> {{ trans('buttons.delete') }}</button>
 	                                {!! Form::close() !!}   
                                 </td>

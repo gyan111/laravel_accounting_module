@@ -18,7 +18,7 @@
 						</div>
 					@endif
 
-					{!! Form::model($account,['method' => 'PUT', 'route' => ['account.update', $account->id], 'class' => 'form-horizontal']) !!}
+					{!! Form::model($account,['method' => 'PUT', 'route' => ['accounting.account.update', $account->id], 'class' => 'form-horizontal']) !!}
 						
 						@include('account._form',['submit_button_text' => trans('buttons.update')])
 

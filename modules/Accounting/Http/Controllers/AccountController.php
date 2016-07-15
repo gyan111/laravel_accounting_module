@@ -1,21 +1,22 @@
-<?php namespace App\Http\Controllers;
+<?php namespace Modules\Accounting\Http\Controllers;
 
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 
 use Auth;
-use App\Account;
+// use App\Transaction;
+use Modules\Accounting\Entities\Account;
 use Validator;
 use Request;
 use Redirect;
-use App\Http\Requests\AccountRequest;
+use Modules\Accounting\Http\Requests\AccountRequest;
 
 
 class AccountController extends Controller {
 
 	public function __construct()
     {
-    	$this->middleware('auth');
+    	// $this->middleware('auth');
     }
 
 	/**
@@ -48,13 +49,13 @@ class AccountController extends Controller {
 	{
 		$account = Account::create($request->all());
 
-		$account->createdBy()->associate(Auth::user());
-        $account->modifiedBy()->associate(Auth::user());
+		// $account->createdBy()->associate(Auth::user());
+        // $account->modifiedBy()->associate(Auth::user());
         $account->save();
 
 		$request->session()->flash('message', trans('message.account_added'));
 
-		return Redirect::to('account');	
+		return Redirect::to('accounting/account');	
 	}
 
 	/**
@@ -91,12 +92,12 @@ class AccountController extends Controller {
 		$account = Account::findOrFail($id);
 
 		$account->update($request->all());
-        $account->modifiedBy()->associate(Auth::user());
+        // $account->modifiedBy()->associate(Auth::user());
         $account->save();
 
 		$request->session()->flash('message', trans('message.account_updated'));
 
-		return Redirect::to('account');
+		return Redirect::to('accounting/account');
 	}
 
 	/**
@@ -112,7 +113,7 @@ class AccountController extends Controller {
 
 		session()->flash('message', trans('message.account_deleted'));
 
-		return Redirect::to('account');
+		return Redirect::to('accounting/account');
 	}
 
 }

@@ -17,7 +17,7 @@
 							<strong>{{ trans('phrases.whoops') }}</strong> {{ trans('message.input_problem') }}<br><br>
 						</div>
 					@endif
-					{!! Form::open(['route' => 'category.store', 'class' => 'form-horizontal']) !!}
+					{!! Form::open(['route' => 'accounting.category.store', 'class' => 'form-horizontal']) !!}
 
 						@include('category._form',['submit_button_text' => trans('buttons.create')])
 
