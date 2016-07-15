@@ -20,7 +20,7 @@ class TransactionController extends Controller {
 
 	public function __construct()
     {
-    	// $this->middleware('auth');
+    	$this->middleware('auth');
     }
 
 	/**
@@ -61,8 +61,8 @@ class TransactionController extends Controller {
 		$category = Category::findOrFail($request->category_id);
 		$account = Account::findOrFail($request->account_id);
 
-		// $transaction->createdBy()->associate(Auth::user());
-        // $transaction->modifiedBy()->associate(Auth::user());
+		$transaction->createdBy()->associate(Auth::user());
+        $transaction->modifiedBy()->associate(Auth::user());
         $transaction->account()->associate($account);
         $transaction->category()->associate($category);
         $transaction->save();
@@ -118,8 +118,8 @@ class TransactionController extends Controller {
 		$category = Category::findOrFail($request->category_id);
 		$account = Account::findOrFail($request->account_id);
 
-		// $transaction->createdBy()->associate(Auth::user());
-        // $transaction->modifiedBy()->associate(Auth::user());
+		$transaction->createdBy()->associate(Auth::user());
+        $transaction->modifiedBy()->associate(Auth::user());
         $transaction->account()->associate($account);
         $transaction->category()->associate($category);
         $transaction->save();

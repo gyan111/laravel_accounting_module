@@ -16,7 +16,7 @@ class AccountController extends Controller {
 
 	public function __construct()
     {
-    	// $this->middleware('auth');
+    	$this->middleware('auth');
     }
 
 	/**
@@ -49,8 +49,8 @@ class AccountController extends Controller {
 	{
 		$account = Account::create($request->all());
 
-		// $account->createdBy()->associate(Auth::user());
-        // $account->modifiedBy()->associate(Auth::user());
+		$account->createdBy()->associate(Auth::user());
+        $account->modifiedBy()->associate(Auth::user());
         $account->save();
 
 		$request->session()->flash('message', trans('message.account_added'));
@@ -92,7 +92,7 @@ class AccountController extends Controller {
 		$account = Account::findOrFail($id);
 
 		$account->update($request->all());
-        // $account->modifiedBy()->associate(Auth::user());
+        $account->modifiedBy()->associate(Auth::user());
         $account->save();
 
 		$request->session()->flash('message', trans('message.account_updated'));

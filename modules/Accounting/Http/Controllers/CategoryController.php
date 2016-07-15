@@ -14,7 +14,7 @@ class CategoryController extends Controller {
 
 	public function __construct()
     {
-    	// $this->middleware('auth');
+    	$this->middleware('auth');
     }
 
 	/**
@@ -46,8 +46,8 @@ class CategoryController extends Controller {
 	public function store(CategoryRequest $request)
 	{
 		$category = Category::create($request->all());
-		// $category->createdBy()->associate(Auth::user());
-  //       $category->modifiedBy()->associate(Auth::user());
+		$category->createdBy()->associate(Auth::user());
+        $category->modifiedBy()->associate(Auth::user());
         $category->save();
 
 		$request->session()->flash('message', trans('message.category_added'));
